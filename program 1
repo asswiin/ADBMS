@@ -1,3 +1,5 @@
+a)    DDL-CREATE 
+
 1.  Create a table EMPLOYEE have the following fields (emp_id, name,city,dob,adhar_no)
 
 mysql> CREATE TABLE EMPLOYEE(EMP_ID INT PRIMARY KEY,NAME VARCHAR(255),CITY VARCHAR(255),DOB DATE,ADHAR_NO INT);
@@ -14,11 +16,6 @@ mysql> DESC EMPLOYEE;
 | ADHAR_NO | int          | YES  |     | NULL    |       |
 +----------+--------------+------+-----+---------+-------+
 5 rows in set (0.00 sec)
-
-
-
-
-
 
 
 
@@ -46,21 +43,11 @@ mysql> DESC STUDENT;
 
 
 
-
-
-
-
-
 3. Create a temporary table STUDENT1 of STUDENT relation.
 
 mysql> CREATE TEMPORARY TABLE STUDENT1 AS SELECT * FROM STUDENT;
 Query OK, 0 rows affected (0.00 sec)
 Records: 0  Duplicates: 0  Warnings: 0
-
-
-
-
-
 
 
 
@@ -71,10 +58,6 @@ Records: 0  Duplicates: 0  Warnings: 0
 mysql> CREATE TABLE EMPLOYEE1 AS SELECT * FROM EMPLOYEE;
 Query OK, 0 rows affected (0.59 sec)
 Records: 0  Duplicates: 0  Warnings: 0
-
-
-
-
 
 
 
@@ -100,3 +83,42 @@ Query OK, 0 rows affected (0.91 sec)
 
 mysql> create table invoice_item(inv_id int,pid int,quantity int,foreign key(inv_id) references invoice_master(inv_id),foreign key(pid) references product(p_id));
 Query OK, 0 rows affected (0.93 sec)
+
+
+b) DDL-ALTER & DROP
+    1. Add a column ‘SSN’ at the first position in the table EMPLOYEE
+    2. Change the data type of the column ‘DOB’  in year the table EMPLOYEE    
+    3. Delete the column ‘emp_id’ the table EMPLOYEE. 
+    4. Add  the constraint unique for columns ‘SSN, ‘adhar_no’ the table EMPLOYEE
+    5. Delete the NULL constraint of ‘age’ in the STUDENT table.
+    6. Change the table name EMPLOYEE as PERSON
+    7. Delete the table STUDENT1
+
+mysql> alter table EMPLOYEE add SSN varchar(100) first;
+Query OK, 0 rows affected (2.13 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table EMPLOYEE modify DOB varchar(100);;
+Query OK, 0 rows affected (2.08 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table EMPLOYEE drop EMP_ID;
+Query OK, 0 rows affected (1.99 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table EMPLOYEE modify SSN varchar(100) unique;
+Query OK, 0 rows affected (0.70 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+mysql> alter table EMPLOYEE modify ADHAR_NO int unique;
+Query OK, 0 rows affected (0.63 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table student modify age int not null;
+Query OK, 0 rows affected (1.93 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table EMPLOYEE rename to PERSON;
+Query OK, 0 rows affected (0.51 sec)
+
+mysql> drop table STUDENT1;
+Query OK, 0 rows affected (0.00 sec)
