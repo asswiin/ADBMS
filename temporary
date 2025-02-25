@@ -1,5 +1,0 @@
-3. Create a temporary table STUDENT1 of STUDENT relation.
-
-mysql> CREATE TEMPORARY TABLE STUDENT1 AS SELECT * FROM STUDENT;
-Query OK, 0 rows affected (0.00 sec)
-Records: 0  Duplicates: 0  Warnings: 0
