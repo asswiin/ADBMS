@@ -1,0 +1,18 @@
+1.  Create a table EMPLOYEE have the following fields (emp_id, name,city,dob,adhar_no)
+
+mysql> CREATE TABLE EMPLOYEE(EMP_ID INT PRIMARY KEY,NAME VARCHAR(255),CITY VARCHAR(255),DOB DATE,ADHAR_NO INT);
+Query OK, 0 rows affected (0.71 sec)
+
+mysql> DESC EMPLOYEE;
++----------+--------------+------+-----+---------+-------+
+| Field    | Type         | Null | Key | Default | Extra |
++----------+--------------+------+-----+---------+-------+
+| EMP_ID   | int          | NO   | PRI | NULL    |       |
+| NAME     | varchar(255) | YES  |     | NULL    |       |
+| CITY     | varchar(255) | YES  |     | NULL    |       |
+| DOB      | date         | YES  |     | NULL    |       |
+| ADHAR_NO | int          | YES  |     | NULL    |       |
++----------+--------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+
