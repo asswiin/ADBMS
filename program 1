@@ -62,3 +62,18 @@ mysql> DESC STUDENT;
 mysql> CREATE TEMPORARY TABLE STUDENT1 AS SELECT * FROM STUDENT;
 Query OK, 0 rows affected (0.00 sec)
 Records: 0  Duplicates: 0  Warnings: 0
+
+
+
+
+
+
+
+
+
+4. Create a duplicate table of EMPLOYEE.
+
+
+mysql> CREATE TABLE EMPLOYEE1 AS SELECT * FROM EMPLOYEE;
+Query OK, 0 rows affected (0.59 sec)
+Records: 0  Duplicates: 0  Warnings: 0
