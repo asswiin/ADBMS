@@ -24,16 +24,10 @@ mysql> DESC EMPLOYEE;
 
 
 2.  Create a table STUDENT have the fields(roll_no, name, age, address, gender)and add following constraints on it.
-
     Roll_no – Primary key
-
     Name – does not allow null values
-
     Age- must be in between (0-99), does not allow null values
-
     ender- default value is ‘m’
-
-
 
 mysql> CREATE TABLE STUDENT(ROLL_NO INT PRIMARY KEY,NAME VARCHAR(255) NOT NULL,AGE INT NOT NULL CHECK(AGE BETWEEN 0 AND 99),GENDER VARCHAR(10) DEFAULT 'M');
 Query OK, 0 rows affected (0.91 sec)
@@ -77,3 +71,32 @@ Records: 0  Duplicates: 0  Warnings: 0
 mysql> CREATE TABLE EMPLOYEE1 AS SELECT * FROM EMPLOYEE;
 Query OK, 0 rows affected (0.59 sec)
 Records: 0  Duplicates: 0  Warnings: 0
+
+
+
+
+
+
+
+
+5. Create an INVOICE database and having following tables.
+
+        Customer(id, name, address, city, ph_no)
+        Product(pid,  pname, price (default 0))
+        Invoice_master(inv_id, cust_id(FK), inv_date)
+        Invoice_item(inv_id (FK),  pid(FK), quantity)
+
+mysql> create database INVOICE;
+Query OK, 1 row affected (0.15 sec)
+
+mysql> create table customer(id int primary key,name varchar(200),address varchar(200),city varchar(200),phone_no int);
+Query OK, 0 rows affected (0.79 sec)
+
+mysql> create table product(p_id int primary key,p_name varchar(200),price decimal(10.2) default 000.00);
+Query OK, 0 rows affected (1.33 sec)
+
+mysql> create table invoice_master(inv_id int primary key,cust_id int,inv_date date,foreign key(cust_id) references customer(id));
+Query OK, 0 rows affected (0.91 sec)
+
+mysql> create table invoice_item(inv_id int,pid int,quantity int,foreign key(inv_id) references invoice_master(inv_id),foreign key(pid) references product(p_id));
+Query OK, 0 rows affected (0.93 sec)
