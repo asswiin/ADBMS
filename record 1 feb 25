@@ -98,8 +98,8 @@ mysql> alter table EMPLOYEE add SSN varchar(100) first;
 Query OK, 0 rows affected (2.13 sec)
 Records: 0  Duplicates: 0  Warnings: 0
 
-mysql> alter table EMPLOYEE modify DOB varchar(100);;
-Query OK, 0 rows affected (2.08 sec)
+mysql> alter table EMPLOYEE1 modify DOB year;
+Query OK, 0 rows affected (2.32 sec)
 Records: 0  Duplicates: 0  Warnings: 0
 
 mysql> alter table EMPLOYEE drop EMP_ID;
@@ -122,6 +122,30 @@ Query OK, 0 rows affected (0.51 sec)
 
 mysql> drop table STUDENT1;
 Query OK, 0 rows affected (0.00 sec)
+
+mysql> desc EMPLOYEE1;
++----------+--------------+------+-----+---------+-------+
+| Field    | Type         | Null | Key | Default | Extra |
++----------+--------------+------+-----+---------+-------+
+| EMP_ID   | int          | NO   |     | NULL    |       |
+| NAME     | varchar(255) | YES  |     | NULL    |       |
+| CITY     | varchar(255) | YES  |     | NULL    |       |
+| DOB      | year         | YES  |     | NULL    |       |
+| ADHAR_NO | int          | YES  |     | NULL    |       |
++----------+--------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> desc student;
++---------+--------------+------+-----+---------+-------+
+| Field   | Type         | Null | Key | Default | Extra |
++---------+--------------+------+-----+---------+-------+
+| roll_no | int          | NO   | PRI | NULL    |       |
+| name    | varchar(100) | YES  |     | NULL    |       |
+| age     | int          | NO   |     | NULL    |       |
++---------+--------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+
 
 //RESUBMIT
 DOB VARCHAR??
