@@ -150,3 +150,5 @@ mysql> desc student;
 //RESUBMIT
 DOB VARCHAR??
 desc table after create
+//RESUBMIT
+//DESCRIBE INVOICE DATABASE
