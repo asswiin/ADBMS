@@ -72,17 +72,66 @@ Records: 0  Duplicates: 0  Warnings: 0
 mysql> create database INVOICE;
 Query OK, 1 row affected (0.15 sec)
 
+mysql> use INVOICE;
+
+
 mysql> create table customer(id int primary key,name varchar(200),address varchar(200),city varchar(200),phone_no int);
 Query OK, 0 rows affected (0.79 sec)
+
+mysql> desc customer;
++----------+--------------+------+-----+---------+-------+
+| Field    | Type         | Null | Key | Default | Extra |
++----------+--------------+------+-----+---------+-------+
+| id       | int          | NO   | PRI | NULL    |       |
+| name     | varchar(200) | YES  |     | NULL    |       |
+| address  | varchar(200) | YES  |     | NULL    |       |
+| city     | varchar(200) | YES  |     | NULL    |       |
+| phone_no | varchar(100) | YES  |     | NULL    |       |
++----------+--------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
 
 mysql> create table product(p_id int primary key,p_name varchar(200),price decimal(10.2) default 000.00);
 Query OK, 0 rows affected (1.33 sec)
 
+mysql> desc product;
++--------+---------------+------+-----+---------+-------+
+| Field  | Type          | Null | Key | Default | Extra |
++--------+---------------+------+-----+---------+-------+
+| p_id   | int           | NO   | PRI | NULL    |       |
+| p_name | varchar(200)  | YES  |     | NULL    |       |
+| price  | decimal(10,0) | YES  |     | 0       |       |
++--------+---------------+------+-----+---------+-------+
+3 rows in set (0.01 sec)
+
+
 mysql> create table invoice_master(inv_id int primary key,cust_id int,inv_date date,foreign key(cust_id) references customer(id));
 Query OK, 0 rows affected (0.91 sec)
 
+mysql> desc invoice_master;
++----------+------+------+-----+---------+-------+
+| Field    | Type | Null | Key | Default | Extra |
++----------+------+------+-----+---------+-------+
+| inv_id   | int  | NO   | PRI | NULL    |       |
+| cust_id  | int  | YES  | MUL | NULL    |       |
+| inv_date | date | YES  |     | NULL    |       |
++----------+------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+
 mysql> create table invoice_item(inv_id int,pid int,quantity int,foreign key(inv_id) references invoice_master(inv_id),foreign key(pid) references product(p_id));
 Query OK, 0 rows affected (0.93 sec)
+
+mysql> desc invoice_item;
++----------+------+------+-----+---------+-------+
+| Field    | Type | Null | Key | Default | Extra |
++----------+------+------+-----+---------+-------+
+| inv_id   | int  | YES  | MUL | NULL    |       |
+| pid      | int  | YES  | MUL | NULL    |       |
+| quantity | int  | YES  |     | NULL    |       |
++----------+------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+
 
 
 b) DDL-ALTER & DROP
