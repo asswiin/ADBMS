@@ -128,7 +128,6 @@ mysql> select * from invoice_item;
 
 
 
-
 b) DML - UPDATE 
 
             
@@ -178,9 +177,6 @@ Rows matched: 2  Changed: 2  Warnings: 0
 
 c) DML - DELETE 
 		 
-              
-             
-              
               
 1. Delete the record of customer id ‘10001’. 
 
