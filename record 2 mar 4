@@ -226,4 +226,4 @@ Query OK, 1 row affected (0.13 sec)
 mysql> delete from invoice_item where quantity limit 2;
 Query OK, 2 rows affected (0.19 sec)
 
-
+//VERIFIED
