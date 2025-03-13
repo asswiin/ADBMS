@@ -1,0 +1,204 @@
+) ACCESSING DATABASE:  (SELECT, Filtering using WHERE, ORDER BY Clauses)
+
+
+1.    List all invoice items, avoid duplicates.
+
+mysql> select distinct quantity from invoice_item;
++----------+
+| quantity |
++----------+
+|       10 |
+|        1 |
+|        5 |
+|        2 |
++----------+
+4 rows in set (0.02 sec)
+
+
+
+
+2.List the invoice details from 1st January 2024 to 31st march 2024
+
+mysql> select * from invoice_master where inv_date between '2024-01-01' and '2024-03-31';
++--------+---------+------------+
+| inv_id | cust_id | inv_date   |
++--------+---------+------------+
+|    109 |   10009 | 2024-01-10 |
+|    110 |   10010 | 2024-03-20 |
++--------+---------+------------+
+2 rows in set (0.00 sec)
+
+
+
+
+3.List the customer details who not live in ‘tvm’.
+
+
+mysql> select * from customer where city not like 'trivandrum';
++-------+------+---------+----------+------------+
+| id    | name | address | city     | phone_no   |
++-------+------+---------+----------+------------+
+| 10004 | sob  | kerala  | thrissur | 9856245667 |
+| 10005 | rob  | kerala  | calicut  | 9876567898 |
+| 10006 | tob  | kerala  | kochi    | 9876545678 |
+| 10008 | yob  | kerala  | calicut  | NULL       |
+| 10010 | hob  | kerala  | kochi    | 2345671208 |
++-------+------+---------+----------+------------+
+5 rows in set (0.00 sec)
+
+
+
+
+5.Display customer names in descending order.
+
+mysql> select name from customer  order by name desc;
++------+
+| name |
++------+
+| zob  |
+| yob  |
+| tob  |
+| sob  |
+| rob  |
+| mob  |
+| hob  |
++------+
+7 rows in set (0.00 sec)
+
+
+
+
+6.Display the customer details sorted in ascending by city and descending by names.
+
+mysql> select * from customer order by city asc,name desc;
++-------+------+---------+------------+------------+
+| id    | name | address | city       | phone_no   |
++-------+------+---------+------------+------------+
+| 10008 | yob  | kerala  | calicut    | NULL       |
+| 10005 | rob  | kerala  | calicut    | 9876567898 |
+| 10006 | tob  | kerala  | kochi      | 9876545678 |
+| 10010 | hob  | kerala  | kochi      | 2345671208 |
+| 10004 | sob  | kerala  | thrissur   | 9856245667 |
+| 10009 | zob  | kerala  | trivandrum | 8765987123 |
+| 10007 | mob  | kerala  | trivandrum | NULL       |
++-------+------+---------+------------+------------+
+7 rows in set (0.00 sec)
+
+
+
+
+7.Find the customer names who have ‘e’ or ‘a’ in them and at least 3 characters in length
+
+mysql> select name from customer where(name like '%e%' or name like '%a%') and length(name)>=3;
++--------+
+| name   |
++--------+
+| Aswin  |
+| Jaseem |
++--------+
+2 rows in set (0.00 sec)
+
+
+
+
+8.List the names of customers their names have ‘r’ in second position.
+
+mysql> select * from customer where name like '_r%';
++-------+------+---------+---------+----------+
+| id    | name | address | city    | phone_no |
++-------+------+---------+---------+----------+
+| 10008 | crob | kerala  | calicut | NULL     |
++-------+------+---------+---------+----------+
+1 row in set (0.00 sec)
+
+
+
+
+
+b) OPTIMIZING DATABASE:  (GROUP BY, AGGREGATE FUNCTIONS)
+
+
+
+
+
+
+1.List product name, price except soap on price order.
+
+
+<pre>mysql&gt; select p_name,price from product where p_name&lt;&gt;&apos;soap&apos; order by price asc;
++--------+--------+
+| p_name | price  |
++--------+--------+
+| pencil |     31 |
+| pen    |    102 |
+| book   |    204 |
+| shirt  |   1000 |
+| shoes  |   2000 |
+| phone  |  15000 |
+| laptop |  25000 |
+| TV     |  40000 |
+| car    | 540000 |
++--------+--------+
+9 rows in set (0.00 sec)
+
+
+
+
+2.Find minimum, maximum and average price of products.
+
+mysql> select min(price) as min_price,max(price) as max_price,avg(price) as avg_price from product;
++-----------+-----------+------------+
+| min_price | max_price | avg_price  |
++-----------+-----------+------------+
+|        31 |    540000 | 62348.0000 |
++-----------+-----------+------------+
+1 row in set (0.00 sec)
+
+
+
+
+3.Find number of customers in each city.
+
+mysql> select city,count(*) as customer_count from customer group by city
+having count(*)<3;
++------------+----------------+
+| city       | customer_count |
++------------+----------------+
+| calicut    |              2 |
+| trivandrum |              2 |
++------------+----------------+
+2 rows in set (0.00 sec)
+
+
+
+
+4.Find number of customers in each city, only include city with more than 3 customers.
+
+mysql> select city,count(*) as customer_count from customer group by city
+having count(*)>=3;
++-------+----------------+
+| city  | customer_count |
++-------+----------------+
+| kochi |              3 |
++-------+----------------+
+1 row in set (0.00 sec)
+
+
+
+
+5.Show data as displayed ‘who, where’ Eg: ‘customer1 lives in ekm’
+
+mysql> select concat(name, ' lives in ', city) as 'who         where' from customer;
++---------------------------+
+| who         where         |
++---------------------------+
+| sob lives in kochi        |
+| rob lives in calicut      |
+| tob lives in kochi        |
+| mob lives in trivandrum   |
+| crob lives in calicut     |
+| Aswin lives in trivandrum |
+| Jaseem lives in kochi     |
++---------------------------+
+7 rows in set (0.00 sec)
+
