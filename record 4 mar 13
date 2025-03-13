@@ -12,7 +12,7 @@ mysql> select distinct quantity from invoice_item;
 |        5 |
 |        2 |
 +----------+
-4 rows in set (0.02 sec)
+4 rows in set (0.02 sec) 
 
 
 
