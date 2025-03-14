@@ -202,3 +202,4 @@ mysql> select concat(name, ' lives in ', city) as 'who         where' from custo
 +---------------------------+
 7 rows in set (0.00 sec)
 
+//VERIFIED
