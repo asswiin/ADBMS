@@ -9,7 +9,7 @@ mysql> select p_name,price from product where p_id in(select pid from invoice_it
 +--------+--------+
 | p_name | price  |
 +--------+--------+
-| pencil |     31 |
+| pencil |     31 | 
 | soap   |    143 |
 | laptop |  25000 |
 | phone  |  15000 |
