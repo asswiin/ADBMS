@@ -1,0 +1,142 @@
+					OPTIMIZING DATABASE: (JOINS)
+
+
+1.List the product name and quantity of invoice items.
+
+mysql> select p.p_name, sum(ii.quantity) as quantity from invoice_item ii
+join product p on ii.pid = p.p_id group by p.p_name;
++--------+----------+
+| p_name | quantity |
++--------+----------+
+| pencil |       11 |
+| laptop |        1 |
+| phone  |        3 |
+| TV     |        1 |
+| car    |        2 |
+| shirt  |        5 |
+| shoes  |        4 |
+| soap   |       10 |
+| pen    |        3 |
++--------+----------+
+9 rows in set (0.00 sec)
+
+
+
+
+2.Display invoice details of the transaction dated ’31-03-2023’.
+
+mysql> select * from invoice_master im join invoice_item ii on im.inv_id=ii.inv_id  where inv_date='2023-03-31';
++--------+---------+------------+--------+------+----------+
+| inv_id | cust_id | inv_date   | inv_id | pid  | quantity |
++--------+---------+------------+--------+------+----------+
+|    107 |   10007 | 2023-03-31 |    107 |    7 |        1 |
+|    107 |   10007 | 2023-03-31 |    107 |    2 |        3 |
++--------+---------+------------+--------+------+----------+
+
+
+
+
+3.Display the customer name, product name, invoice date of purchased item ‘pen’.
+
+mysql> select C.name,P.p_name,IM.inv_date from invoice_master IM inner join customer C on C.id=IM.cust_id inner join invoice_item II on IM.inv_id=II.inv_id inner join product P on P.p_id=II.pid where P.p_name='pen';
++------+--------+------------+
+| name | p_name | inv_date   |
++------+--------+------------+
+| mob  | pen    | 2023-03-31 |
++------+--------+------------+
+1 row in set (0.00 sec)
+
+
+
+
+4.Display all customer details and invoice details must include customer has not purchased items.
+
+mysql> select C.id,C.name,IM.inv_id,IM.inv_date from customer C left join
+invoice_master IM on IM.cust_id=C.id;
++-------+--------+--------+------------+
+| id    | name   | inv_id | inv_date   |
++-------+--------+--------+------------+
+| 10004 | sob    |    104 | 2024-12-30 |
+| 10005 | rob    |    105 | 2023-06-10 |
+| 10006 | tob    |    106 | 2023-01-01 |
+| 10007 | mob    |    107 | 2023-03-31 |
+| 10008 | crob   |    108 | 2023-10-23 |
+| 10009 | Aswin  |    109 | 2024-01-10 |
+| 10010 | Jaseem |    110 | 2024-03-20 |
++-------+--------+--------+------------+
+7 rows in set (0.00 sec)
+
+
+
+
+
+
+
+
+
+			OPTIMIZING DATABASE: (Using Set, arithmetic, logical and special operators)
+
+
+1.Display customer_id, city  who lives either in ‘CLT’ or in ‘TVM’
+
+mysql> select name,city from customer where city='calicut' or city='trivan
+drum';
++-------+------------+
+| name  | city       |
++-------+------------+
+| rob   | calicut    |
+| mob   | trivandrum |
+| crob  | calicut    |
+| Aswin | trivandrum |
++-------+------------+
+4 rows in set (0.01 sec)
+
+
+
+
+
+2.Display product details with an updated price amount(new price= old price+5rs)
+
+mysql> select p_id,p_name,price+5 as price from product;
++------+-----------+-----------+
+| p_id | p_name    | price     |
++------+-----------+-----------+
+|    1 | pencil    |     36.00 |
+|    2 | pen       |    107.00 |
+|    3 | soap      |    148.00 |
+|    4 | book      |    209.00 |
+|    5 | laptop    |  25005.00 |
+|    6 | phone     |  15005.00 |
+|    7 | TV        |  40005.00 |
+|    8 | car       | 540005.00 |
+|    9 | shirt     |   1005.00 |
+|   10 | shoes     |   2005.00 |
+|   11 | headphone |   1505.00 |
++------+-----------+-----------+
+11 rows in set (0.00 sec)
+
+
+
+
+3.Display customer details who doesn’t have phone number and lives in ‘Calicut’ city (use logical operators)
+
+mysql> select * from customer where city='calicut' and phone_no is null;
++-------+------+---------+---------+----------+
+| id    | name | address | city    | phone_no |
++-------+------+---------+---------+----------+
+| 10008 | crob | kerala  | calicut | NULL     |
++-------+------+---------+---------+----------+
+1 row in set (0.00 sec)
+
+
+
+
+4.    List the product names if it finds any records in the invoice items table has quantity =3 (use special operators)
+
+mysql> select p_name from product P where exists(select pid from invoice_item II where P.p_id=II.pid and quantity=3);
++--------+
+| p_name |
++--------+
+| pen    |
++--------+
+1 row in set (0.02 sec)
