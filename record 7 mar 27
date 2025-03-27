@@ -7,7 +7,7 @@ mysql> select p.p_name, sum(ii.quantity) as quantity from invoice_item ii
 join product p on ii.pid = p.p_id group by p.p_name;
 +--------+----------+
 | p_name | quantity |
-+--------+----------+
++--------+----------+ 
 | pencil |       11 |
 | laptop |        1 |
 | phone  |        3 |
