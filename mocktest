@@ -3,7 +3,7 @@
 mysql> CREATE DATABASE CompanyDB;
 Query OK, 1 row affected (0.17 sec)
 
-mysql> USE CompanyDB;
+mysql> USE CompanyDB; 
 Database changed
 mysql> 
 
