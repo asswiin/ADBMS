@@ -5,7 +5,7 @@
 
 mysql> delimiter // ;
 mysql> use INVOICE //
-	
+	 
 mysql> create procedure invoicetables()
     -> begin
     -> show tables from INVOICE;
