@@ -1,0 +1,143 @@
+1. Create a database named CompanyDB
+
+mysql> CREATE DATABASE CompanyDB;
+Query OK, 1 row affected (0.17 sec)
+
+mysql> USE CompanyDB;
+Database changed
+mysql> 
+
+
+
+
+2. Create two tables:
+    Employees (EmpID, Name, Department, Salary )
+    Departments (DeptID, DeptName, Location)
+   
+mysql>  create table Employees(EmpID int primary key,Name varchar(50),Department int,Salary decimal(10,2),foreign key (Department) references Departments(DeptID));
+Query OK, 0 rows affected (0.85 sec) 	
+ 
+mysql> create table Departments (DeptID int primary key,DeptName varchar(50),Location varchar(50));
+Query OK, 0 rows affected (0.79 sec)
+
+
+
+
+3. Insert at least  5 records into the  table employees and  3 records into the department table.
+
+employee table
+mysql> insert into Employees values(101, 'arun', 1, 50000);
+Query OK, 1 row affected (0.09 sec)
+
+mysql> insert into Employees values(102, 'bob', 2, 75000);
+Query OK, 1 row affected (0.13 sec)
+
+mysql> insert into Employees values(103, 'rob', 3, 45000);
+Query OK, 1 row affected (0.09 sec)
+
+mysql> insert into Employees values(104, 'tob', 2, 80000);
+Query OK, 1 row affected (0.11 sec)
+
+mysql> insert into Employees values(105, 'anoop', 1, 60000);
+Query OK, 1 row affected (0.13 sec)
+
+
+department table
+mysql> insert into Departments values (1, 'HR', 'New York');
+Query OK, 1 row affected (0.13 sec)
+
+mysql> insert into Departments values (2, 'IT', 'San Francisco');
+Query OK, 1 row affected (0.11 sec)
+
+mysql> insert into Departments values (3, 'Finance', 'Chicago');
+Query OK, 1 row affected (0.12 sec)
+
+
+
+
+4. Write SQL queries to:
+
+a) Select employees whose names start with ‘A’ using LIKE.
+
+mysql> select * from Employees where Name like 'A%';
++-------+-------+------------+----------+
+| EmpID | Name  | Department | Salary   |
++-------+-------+------------+----------+
+|   101 | arun  |          1 | 50000.00 |
+|   105 | anoop |          1 | 60000.00 |
++-------+-------+------------+----------+
+2 rows in set (0.00 sec)
+
+
+b) Display the total number of employees in each department using GROUP BY.
+
+mysql> select Department, count(*) AS TotalEmployees from Employees group by Department;
++------------+----------------+
+| Department | TotalEmployees |
++------------+----------------+
+|          1 |              2 |
+|          2 |              2 |
+|          3 |              1 |
++------------+----------------+
+3 rows in set (0.01 sec)
+
+
+c) Retrieve all employee details sorted by salary in descending order using ORDER BY.
+
+mysql> select * from Employees order by Salary desc;
++-------+-------+------------+----------+
+| EmpID | Name  | Department | Salary   |
++-------+-------+------------+----------+
+|   104 | tob   |          2 | 80000.00 |
+|   102 | bob   |          2 | 75000.00 |
+|   105 | anoop |          1 | 60000.00 |
+|   101 | arun  |          1 | 50000.00 |
+|   103 | rob   |          3 | 45000.00 |
++-------+-------+------------+----------+
+5 rows in set (0.00 sec)
+
+
+d) Fetch employee names, their departments, and department locations using JOIN.
+
+mysql> select e.Name, d.DeptName, d.Location from Employees e join Departments d on e.Department = d.DeptID;
++-------+----------+---------------+
+| Name  | DeptName | Location      |
++-------+----------+---------------+
+| arun  | HR       | New York      |
+| anoop | HR       | New York      |
+| bob   | IT       | San Francisco |
+| tob   | IT       | San Francisco |
+| rob   | Finance  | Chicago       |
++-------+----------+---------------+
+5 rows in set (0.00 sec)
+
+
+e) Find employees earning more than the average salary using a SUBQUERY.
+
+mysql> select * from Employees where Salary > (select avg(Salary) from Employees);
++-------+------+------------+----------+
+| EmpID | Name | Department | Salary   |
++-------+------+------------+----------+
+|   102 | bob  |          2 | 75000.00 |
+|   104 | tob  |          2 | 80000.00 |
++-------+------+------------+----------+
+2 rows in set (0.00 sec)
+
+
+f) Create a VIEW to display employees earning more than 55,000.
+
+mysql> create view HighSalary as select * from Employees where Salary > 55000;
+Query OK, 0 rows affected (0.23 sec)
+
+mysql> select * from HighSalary;
++-------+-------+------------+----------+
+| EmpID | Name  | Department | Salary   |
++-------+-------+------------+----------+
+|   102 | bob   |          2 | 75000.00 |
+|   104 | tob   |          2 | 80000.00 |
+|   105 | anoop |          1 | 60000.00 |
++-------+-------+------------+----------+
+3 rows in set (0.00 sec)
+
+
+
