@@ -138,6 +138,6 @@ mysql> select * from HighSalary;
 |   105 | anoop |          1 | 60000.00 |
 +-------+-------+------------+----------+
 3 rows in set (0.00 sec)
-
+//VERIFIED
 
 
