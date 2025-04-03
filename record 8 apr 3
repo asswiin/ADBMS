@@ -3,7 +3,7 @@
 		
 1.Create a procedure to display all tables in the invoice database.
 
-mysql> delimiter // ;
+mysql> delimiter // ; 
 mysql> use INVOICE //
 	
 mysql> create procedure invoicetables()
