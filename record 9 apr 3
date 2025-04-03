@@ -5,7 +5,7 @@
 
 mysql> create function minmax(min int) returns varchar(20) deterministic begin return case when min<=200 then 'low' when min<=2000 then 'medium' else 'high' end; end//
 Query OK, 0 rows affected (0.15 sec)
-
+ 
 mysql> select p_name,price,minmax(price) as PRICE_RANGE from product//
 +-----------+-----------+-------------+
 | p_name    | price     | PRICE_RANGE |
