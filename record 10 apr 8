@@ -1,0 +1,74 @@
+ 							PL/SQL -TRIGGER
+ 				
+ 					
+1.Create a trigger to handle updates to the customer table.
+
+mysql> select * from customer//
+    
++-------+--------+---------+------------+------------+
+| id    | name   | address | city       | phone_no   |
++-------+--------+---------+------------+------------+
+| 10004 | sob    | kerala  | kochi      | 9856245667 |
+| 10005 | rob    | kerala  | calicut    | 9876567898 |
+| 10006 | tob    | kerala  | kochi      | 9876545678 |
+| 10007 | mob    | kerala  | trivandrum | NULL       |
+| 10008 | crob   | kerala  | calicut    | NULL       |
+| 10009 | Aswin  | kerala  | trivandrum | 8765987123 |
+| 10010 | Jaseem | kerala  | kochi      | 2345671208 |
++-------+--------+---------+------------+------------+
+7 rows in set (0.03 sec)
+
+mysql> create trigger c_upd
+    -> after update on customer
+    -> for each row begin
+    -> insert into cust set id=old.id, name=old.name,address=old.address,city=old.city, phone_no=old.phone_no;
+    -> end //
+
+mysql> update customer set name='ajay' where id=10008//
+Query OK, 1 row affected (0.11 sec)
+
+mysql> select * from cust//   
++-------+------+---------+------+----------+
+| id    | name | address | city | phone_no |
++-------+------+---------+------+----------+
+| 10008 | crob | kerala  | NULL | NULL     |
++-------+------+---------+------+----------+
+1 row in set (0.00 sec)
+
+
+
+2.Create a trigger to handle inserts to the product relation ( if price < 5 the set price to 10).
+
+mysql> create trigger pcheck 
+    -> before insert on product
+    -> for each row
+    -> begin
+    ->   if new.price<5 then
+    -> set new.price=10;
+    -> end if;
+    -> end //
+Query OK, 0 rows affected (0.18 sec)
+
+mysql> insert into product values(12,'pin',4)//
+Query OK, 1 row affected (0.09 sec)
+
+mysql> select * from product//
+    
++------+-----------+-----------+
+| p_id | p_name    | price     |
++------+-----------+-----------+
+|    1 | pencil    |     31.00 |
+|    2 | pen       |    102.00 |
+|    3 | soap      |    143.00 |
+|    4 | book      |    204.00 |
+|    5 | laptop    |  25000.00 |
+|    6 | phone     |  15000.00 |
+|    7 | TV        |  40000.00 |
+|    8 | car       | 540000.00 |
+|    9 | shirt     |   1000.00 |
+|   10 | shoes     |   2000.00 |
+|   11 | headphone |   1500.00 |
+|   12 | pin       |     10.00 |
++------+-----------+-----------+
+12 rows in set (0.00 sec)
+
