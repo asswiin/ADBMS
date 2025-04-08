@@ -5,7 +5,7 @@
 mysql> create procedure l_name(inout name_list varchar(4000))
     -> begin
     -> declare is_done integer default 0;
-    -> declare s_name varchar(100) default "";
+    -> declare s_name varchar(100) default ""; 
     -> declare stud_cursor cursor for
     -> select name from customer;
     -> declare continue handler for not found set is_done=1;
