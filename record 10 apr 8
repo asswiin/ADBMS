@@ -8,7 +8,7 @@ mysql> select * from customer//
 +-------+--------+---------+------------+------------+
 | id    | name   | address | city       | phone_no   |
 +-------+--------+---------+------------+------------+
-| 10004 | sob    | kerala  | kochi      | 9856245667 |
+| 10004 | sob    | kerala  | kochi      | 9856245667 | 
 | 10005 | rob    | kerala  | calicut    | 9876567898 |
 | 10006 | tob    | kerala  | kochi      | 9876545678 |
 | 10007 | mob    | kerala  | trivandrum | NULL       |
