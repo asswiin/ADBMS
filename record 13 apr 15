@@ -1,0 +1,81 @@
+						NoSQL- RETRIEVING DATA
+						
+						
+1.Write a MongoDB query to display the customer documents having city ‘ekm’,’tvm’.
+
+INVOICE> db.CUSTOMER.find({city:{$in:["ekm","tvm"]}}).pretty()
+[
+  {
+    _id: ObjectId('67fe2f51b16b46b572d861ea'),
+    cust_id: '102',
+    name: 'tob',
+    address: 'kerala',
+    city: 'ekm',
+    phone_no: '9765432198'
+  },
+  {
+    _id: ObjectId('67fe2f71b16b46b572d861eb'),
+    cust_id: '103',
+    name: 'mob',
+    address: 'kerala',
+    city: 'tvm',
+    phone_no: '9654321789'
+  },
+  {
+    _id: ObjectId('67fe2f92b16b46b572d861ec'),
+    cust_id: '104',
+    name: 'sob',
+    address: 'kerala',
+    city: 'ekm',
+    phone_no: '9134234567'
+  }
+]
+
+
+
+
+2.Write a MongoDB query to display all product documents their price >50
+
+db.PRODUCT.find({ price: { $gt: 50 } }).pretty()
+[
+  _id: ObjectId('67fe30a5b16b46b572d861f3'),
+    d: '203',
+    name: 'book',
+    price: '60'
+  },
+  {
+    _id: ObjectId('67fe30a8b16b46b572d861f4'),
+    p_id: '204',
+    name: 'sketches',
+    price: '100'
+  }
+]
+
+
+
+
+3.Write a MongoDB query to find customer documents who not live in ‘tvm’.
+
+INVOICE> db.CUSTOMER.find({city: { $ne: "tvm" } }).pretty()
+[
+  {
+    _id: ObjectId('67fe2f51b16b46b572d861ea'),
+    cust_id: '102',
+    name: 'tob',
+    address: 'kerala',
+    city: 'ekm',
+    phone_no: '9765432198'
+  },
+  {
+    _id: ObjectId('67fe2f92b16b46b572d861ec'),
+    cust_id: '104',
+    name: 'sob',
+    address: 'kerala',
+    city: 'ekm',
+    phone_no: '9134234567'
+  }
+]
+
+
+
+
