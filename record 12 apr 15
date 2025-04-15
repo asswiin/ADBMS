@@ -4,7 +4,7 @@
 1.Write a MongoDB query to create an INVOICE database and collections (CUSTOMER, PRODUCT) and its corresponding documents.
  
 test> use INVOICE
-switched to db INVOICE
+switched to db INVOICE 
 
 INVOICE> db.CUSTOMER.insertOne({cust_id:"101",name:"rob",address:"kerala",city:"calicut",phone_no:"9876543212"})
 
