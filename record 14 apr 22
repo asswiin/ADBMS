@@ -5,7 +5,7 @@
 INVOICE> db.CUSTOMER.find().sort({name:1})
 [
   {
-    _id: ObjectId('67fe2f71b16b46b572d861eb'),
+    _id: ObjectId('67fe2f71b16b46b572d861eb'), 
     cust_id: '103',
     name: 'mob',
     address: 'kerala',
