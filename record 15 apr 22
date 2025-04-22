@@ -1,0 +1,60 @@
+						NoSQL - ADMINISTRATION & SHELL COMMANDS
+						
+						
+1.Write a MongoDB query to create a user “CUSTOMER1” and grant the read role in the INVOICE database.
+
+db.createUser({user:"CUSTOMER1",pwd:"your_password",roles:[{role:"read",db:"INVOICE"}]});
+{ ok: 1 }
+
+INVOICE> show users
+[
+  {
+    _id: 'INVOICE.CUSTOMER1',
+    userId: UUID('cabd34e6-565a-4eca-8988-1f641d053582'),
+    user: 'CUSTOMER1',
+    db: 'INVOICE',
+    roles: [ { role: 'read', db: 'INVOICE' } ],
+    mechanisms: [ 'SCRAM-SHA-1', 'SCRAM-SHA-256' ]
+  }
+]
+
+
+
+
+2.Write a MongoDB query to create the backup for the INVOICE database.
+
+sudo mongodump --db INVOICE --out /home/ksb/mongo_backups/
+
+2025-04-22T15:20:26.242+0530	writing INVOICE.CUSTOMER to /home/ksb/mongo_backups/INVOICE/CUSTOMER.bson
+2025-04-22T15:20:26.243+0530	writing INVOICE.PRODUCT to /home/ksb/mongo_backups/INVOICE/PRODUCT.bson
+2025-04-22T15:20:26.243+0530	done dumping INVOICE.CUSTOMER (3 documents)
+2025-04-22T15:20:26.244+0530	done dumping INVOICE.PRODUCT (3 documents)
+
+
+
+
+
+3.Write a MongoDB query to restore a particular database or a collection.
+
+mongorestore --drop --db=INVOICE --collection=customer ~/mongo_backups/INVOICE/CUSTOMER.bson
+2025-04-22T15:22:50.686+0530	checking for collection data in /home/ksb/mongo_backups/INVOICE/CUSTOMER.bson
+2025-04-22T15:22:50.686+0530	reading metadata for INVOICE.customer from /home/ksb/mongo_backups/INVOICE/CUSTOMER.metadata.json
+2025-04-22T15:22:50.945+0530	restoring INVOICE.customer from /home/ksb/mongo_backups/INVOICE/CUSTOMER.bson
+2025-04-22T15:22:50.989+0530	finished restoring INVOICE.customer (3 documents, 0 failures)
+2025-04-22T15:22:50.989+0530	no indexes to restore for collection INVOICE.customer
+2025-04-22T15:22:50.989+0530	3 document(s) restored successfully. 0 document(s) failed to restore.
+
+
+
+
+4.Write a MongoDB query to create an index for the collection customer using the field customer_name.
+
+INVOICE> db.CUSTOMER.createIndex({customer_name: 1})
+customer_name_1
+INVOICE> db.CUSTOMER.getIndexes()
+[
+  { v: 2, key: { _id: 1 }, name: '_id_' },
+  { v: 2, key: { customer_name: 1 }, name: 'customer_name_1' }
+]
+
+
