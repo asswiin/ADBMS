@@ -5,7 +5,7 @@
 
 db.createUser({user:"CUSTOMER1",pwd:"your_password",roles:[{role:"read",db:"INVOICE"}]});
 { ok: 1 }
-
+ 
 INVOICE> show users
 [
   {
