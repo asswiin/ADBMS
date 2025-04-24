@@ -3,7 +3,7 @@
 (base) ksb@ksb-07:mongod --replSet rs0 --port 27017 --dbpath ./node1 --bind_ip localhost
 
 (base) ksb@ksb-07:mongod --replSet rs0 --port 27018 --dbpath ./node2 --bind_ip localhost
-
+ 
 (base) ksb@ksb-07:mongod --replSet rs0 --port 27019 --dbpath ./node3 --bind_ip localhost
 
   ---fix---
