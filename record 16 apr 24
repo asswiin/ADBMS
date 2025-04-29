@@ -217,3 +217,4 @@ rs0 [direct: secondary] db1> db.customer.find()
 ]
 rs0 [direct: secondary] db1> 
 
+//VERIFIED
